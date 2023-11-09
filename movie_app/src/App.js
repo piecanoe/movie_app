@@ -1,8 +1,6 @@
 import { useState, useEffect} from 'react'
-
 import MovieCard from './MovieCard'
 import SearchIcon from './search.svg'
-
 import './App.css'
 
 const API_URL = 'http://www.omdbapi.com?apikey=5b394152'
@@ -18,6 +16,12 @@ const App = () => {
         setMovies(data.Search)
     }
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            searchMovies(searchTerm)
+        }
+    }
+
     useEffect(() => {
         searchMovies('Spiderman')
     }, [])
@@ -31,6 +35,7 @@ const App = () => {
                     placeholder='Search movie title'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyPress={handleKeyPress}
                 />
                 <img
                     src={SearchIcon}
